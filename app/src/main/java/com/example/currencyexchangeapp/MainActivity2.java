@@ -79,6 +79,16 @@ public class MainActivity2 extends AppCompatActivity {
             return "Error";
         }
 
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            EditText leb=findViewById(R.id.lebanese);
+            //leb.setText(result);
+            resultReady(result);
+        }
+    }
+
+
 
 
 }
