@@ -37,6 +37,50 @@ public class MainActivity extends AppCompatActivity {
     }
     class RequestTask extends AsyncTask<String, String, String> {
 
+        @Override
+        protected String doInBackground(String... uri) {
+            try{
+                URL url = new URL(uri[0]);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("GET");
+                conn.connect();
+
+                if(conn.getResponseCode() != conn.HTTP_OK)
+                {
+                    //Error message for user
+                    //Toast t = Toast.makeText(getApplicationContext(),"Error reading API",Toast.LENGTH_SHORT);
+                    //t.show();
+                }
+                else{
+                    //Parse JSON
+                    String inline = "";
+                    Scanner scanner = new Scanner(url.openStream());
+
+                    //Write all the JSON data into a string using a scanner
+                    while (scanner.hasNext()) {
+                        inline += scanner.nextLine();
+                    }
+
+                    //Close the scanner
+                    scanner.close();
+
+                    //Using the JSON simple library parse the string into a json object
+                    JSONObject obj = new JSONObject(inline);
+                    JSONArray buy = obj.getJSONArray("buy");
+                    int arrayLength = buy.length();
+                    JSONArray latestArray = buy.getJSONArray(arrayLength-1);
+                    return latestArray.getString(1);
+
+                }
+
+
+            }
+            catch (Exception e){
+                //return e.getMessage().toString();
+
+            }
+            return "Error";
+        }
 
 
 
