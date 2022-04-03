@@ -17,24 +17,21 @@ import java.util.Iterator;
 import java.util.Scanner;
 import org.json.*;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Button refButton=findViewById(R.id.change_page);
-        EditText newestRate1;
-        new MainActivity.RequestTask().execute("https://lirarate.org/wp-json/lirarate/v2/rates?currency=LBP");
+        setContentView(R.layout.activity_main3);
+        TextView text = findViewById(R.id.linkage);
+        EditText leb=findViewById(R.id.lebanese);
+        EditText dol=findViewById(R.id.dollar);
+        Button button = findViewById(R.id.convertbutt);
 
 
 
     }
-    public void changePage(View view){
-        Intent intent =new Intent(this, MainActivity2.class);
-        startActivity(intent);
 
-    }
     class RequestTask extends AsyncTask<String, String, String> {
 
         @Override
@@ -85,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            EditText rateNewest=findViewById(R.id.ratePage1);
-            //rateNewest.setText(result);
+            EditText leb=findViewById(R.id.lebanese);
+            //leb.setText(result);
             resultReady(result);
         }
     }
@@ -95,11 +92,27 @@ public class MainActivity extends AppCompatActivity {
     public void resultReady(String rate){
 
         int intRate = Integer.parseInt(rate);
-        EditText rateNewest=findViewById(R.id.ratePage1);
-        double result = intRate;
-        rateNewest.setText(result+"");
+        EditText leb=findViewById(R.id.lebanese);
+        EditText dol=findViewById(R.id.dollar);
 
+        if(leb.getText().toString().compareTo("") != 0 && dol.getText().toString().compareTo("")==0)
+        {
+            double result = Integer.parseInt(leb.getText().toString())/intRate;
+            dol.setText(result+"");
+        }
+        else if(leb.getText().toString().compareTo("") == 0 && dol.getText().toString().compareTo("")!=0){
+            double result = Integer.parseInt(dol.getText().toString())*intRate;
+            leb.setText(result+"");
+        }
+        else if(leb.getText().toString().compareTo("") == 0 && dol.getText().toString().compareTo("")==0){
+            leb.setText(intRate+"");
+            dol.setText("1");
+        }
+        else{
+            Toast t = Toast.makeText(getApplicationContext(),"Error Invalid input",Toast.LENGTH_SHORT);
+            t.show();
 
+        }
 
 
 
@@ -110,9 +123,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void ClickButtonn(View v){
+    public void buttonClick(View v){
 
-        new MainActivity.RequestTask().execute("https://lirarate.org/wp-json/lirarate/v2/rates?currency=LBP");
+        new MainActivity2.RequestTask().execute("https://lirarate.org/wp-json/lirarate/v2/rates?currency=LBP");
 
 
         //TextView text = findViewById(R.id.linkage);
