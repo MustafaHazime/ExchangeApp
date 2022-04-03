@@ -92,7 +92,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void resultReady(String rate){
 
+        int intRate = Integer.parseInt(rate);
+        EditText rateNewest=findViewById(R.id.ratePage1);
+        double result = intRate;
+        rateNewest.setText(result+"");
+
+
+
+
+
+//        EditText leb=findViewById(R.id.lebanese);
+//        leb.setText(intRate);
+//        EditText leb=findViewById(R.id.lebanese);
+
+
+    }
 
 
 }
