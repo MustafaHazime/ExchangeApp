@@ -82,7 +82,14 @@ public class MainActivity extends AppCompatActivity {
             return "Error";
         }
 
-
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            EditText rateNewest=findViewById(R.id.ratePage1);
+            //rateNewest.setText(result);
+            resultReady(result);
+        }
+    }
 
 
 
