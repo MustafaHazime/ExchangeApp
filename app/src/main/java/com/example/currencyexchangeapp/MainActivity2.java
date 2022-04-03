@@ -89,6 +89,39 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
 
+    public void resultReady(String rate){
+
+        int intRate = Integer.parseInt(rate);
+        EditText leb=findViewById(R.id.lebanese);
+        EditText dol=findViewById(R.id.dollar);
+
+        if(leb.getText().toString().compareTo("") != 0 && dol.getText().toString().compareTo("")==0)
+        {
+            double result = Integer.parseInt(leb.getText().toString())/intRate;
+            dol.setText(result+"");
+        }
+        else if(leb.getText().toString().compareTo("") == 0 && dol.getText().toString().compareTo("")!=0){
+            double result = Integer.parseInt(dol.getText().toString())*intRate;
+            leb.setText(result+"");
+        }
+        else if(leb.getText().toString().compareTo("") == 0 && dol.getText().toString().compareTo("")==0){
+            leb.setText(intRate+"");
+            dol.setText("1");
+        }
+        else{
+            Toast t = Toast.makeText(getApplicationContext(),"Error Invalid input",Toast.LENGTH_SHORT);
+            t.show();
+
+        }
+
+
+
+//        EditText leb=findViewById(R.id.lebanese);
+//        leb.setText(intRate);
+//        EditText leb=findViewById(R.id.lebanese);
+
+
+    }
 
 
 }
