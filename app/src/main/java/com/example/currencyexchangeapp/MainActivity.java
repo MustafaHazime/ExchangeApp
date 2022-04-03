@@ -110,5 +110,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void ClickButtonn(View v){
 
+        new MainActivity.RequestTask().execute("https://lirarate.org/wp-json/lirarate/v2/rates?currency=LBP");
+
+
+        //TextView text = findViewById(R.id.linkage);
+        //EditText leb=findViewById(R.id.lebanese);
+        //String lebaneseText=leb.getText().toString();
+        //text.setText(String.valueOf(Float.parseFloat(lebaneseText)/22000));
+
+    }
+//public void conv(View v){
+//    EditText dol=findViewById(R.id.dollar);
+//    TextView text2 = findViewById(R.id.link);
+//    String dollarText=dol.getText().toString();
+//    text2.setText(String.valueOf(Float.parseFloat(dollarText)*22000));
+//
+//
+//}
 }
